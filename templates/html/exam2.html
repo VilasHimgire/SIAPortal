@@ -1,0 +1,222 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Exam Page{% endblock title %}
+
+<script type="text/javascript">
+	function btnClick() {
+		let str = ``
+		fetch("../data/questions.json").then(function (response) {
+			return response.json();
+		}).then(function (questions) {
+			let index = 1
+			for (var Q of questions["questions"]) {
+
+				str += `<div>
+		        <p> ${index}. ${Q.question}</p>
+
+	            <div>
+		            <div class="form-check" >
+			            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+			            <label class="form-check-label" for="flexRadioDefault1">
+			            A. ${Q.opt1}
+			            </label>
+		            </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                        B. ${Q.opt2}
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                        C. ${Q.opt3}
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                        D. ${Q.opt4}
+                        </label>
+                    </div>
+	            </div>
+	        </div>`;
+		    index = index + 1;
+			}
+
+			document.getElementById('questions').innerHTML = str
+		})
+	}
+</script>
+
+{% block body %}
+
+
+<script type="text/javascript">
+	function btnClick() {
+		let str = ``
+		fetch("../data/questions.json").then(function (response) {
+			return response.json();
+		}).then(function (questions) {
+			let index = 1
+			for (var Q of questions) {
+
+				str += ` <div>
+		<p> ${index}. ${Q.question}</p>
+
+	<div>
+		<div class="form-check" >
+			<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+			<label class="form-check-label" for="flexRadioDefault1">
+			  A. ${Q.opt1}
+			</label>
+		  </div>
+		  <div class="form-check">
+			<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+			<label class="form-check-label" for="flexRadioDefault2">
+			 B. ${Q.opt2}
+			</label>
+		  </div><div class="form-check">
+			<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+			<label class="form-check-label" for="flexRadioDefault2">
+			 C. ${Q.opt3}
+			</label>
+		  </div><div class="form-check">
+			<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+			<label class="form-check-label" for="flexRadioDefault2">
+			 D. ${Q.opt4}
+			</label>
+		  </div>
+	</div>
+	</div>`
+
+		index = index + 1
+
+			}
+
+			document.getElementById('questions').innerHTML = str
+		})
+	}
+</script>
+
+
+<!-- 
+<script type="text/javascript">
+		fetch("/get_questions").then(function (response) {
+			// console.log(response.json());
+			return response.json();
+
+		}).then(function (questions) {
+			console.log(questions);
+			for (var Q of questions["questions"]) {
+				var q = document.createElement("ol");
+				var li = document.createElement("li");
+				var opt1 = document.createElement('li');
+				var opt2 = document.createElement('li');
+				var opt3 = document.createElement('li');
+				var opt4 = document.createElement('li');
+
+				li.innerHTML = Q.question;
+				opt1.innerHTML = Q.opt1;
+				opt2.innerHTML = Q.opt2;
+				opt3.innerHTML = Q.opt3;
+				opt4.innerHTML = Q.opt4;
+
+				q.appendChild(li);
+				q.appendChild(opt1);
+				q.appendChild(opt2);
+				q.appendChild(opt3);
+				q.appendChild(opt4);
+
+				document.getElementById("questionNumber").appendChild(q);
+			}
+
+		
+		})
+</script> -->
+
+
+<div class="container-fluid">
+    <button class="btn btn-primary w-100 mt-2 mb-2" onclick="btnClick()">Load Questions</button>
+
+    <!-- <div id="questions">
+        <ol id="questionNumber" type="1">
+
+        </ol>
+        <input type="radio" name="opt1"> <span id="opt1"></span><br>
+        <input type="radio" name="opt2"> <span id="opt2"></span><br>
+        <input type="radio" name="opt3"> <span id="opt3"></span><br>
+        <input type="radio" name="opt4"> <span id="opt4"></span><br>
+		
+        <b><span id="expectedAnswer"> </span></b>
+    </div> -->
+
+	<div id="questions">
+    
+    </div>
+</div>
+
+{% endblock body %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>MCQ Questions</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<h1>MCQ Questions</h1>
+		<form>
+			<div id="questions"></div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</div>
+	<script src="../scripts/exam.js"></script>
+</body>
+
+</html>
+ -->

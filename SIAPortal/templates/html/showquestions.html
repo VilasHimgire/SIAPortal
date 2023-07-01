@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Exam Questions{% endblock title %}
+
+{% block body %}
+<div class="container-fluid mt-3">
+    <div class="d-flex justify-content-end m-3">
+        <a class="btn btn-primary w-25" href="/addquestion">Add Questions</a>
+    </div>
+    <table class="table table-success table-striped table-hover table-bordered border-dark">
+        <tr>
+            <th>Sr. No.</th>
+            <th>Question</th>
+            <th>Option 1</th>
+            <th>Option 2</th>
+            <th>Option 3</th>
+            <th>Option 4</th>
+            <th>Correct Answer</th>
+            <th>Actions</th>
+        </tr>
+        {% for q in questions %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ q.q }}</td>
+                <td>{{ q.opt1 }}</td>
+                <td>{{ q.opt2 }}</td>
+                <td>{{ q.opt3 }}</td>
+                <td>{{ q.opt4 }}</td>
+                <td>{{ q.ans }}</td>
+                <td class="d-flex justify-content-center">
+                    <a href="/updatequestion/{{q.id}}" class="btn btn-danger p-2 m-2"><span class="bi bi-pen-fill"></span></a>
+                    <a href="/deletequestion/{{q.id}}" class="btn btn-danger p-2 m-2"><span class="bi bi-trash-fill"></span></a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock body %}

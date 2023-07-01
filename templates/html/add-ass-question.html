@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Assignment Questions List{% endblock title %}
+
+
+{% block body %}
+
+<h2 class="text-center mt-3">Add Question for Assignment</h2>
+<hr>
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="border border-1 border-dark m-3 w-50 p-2 bg-light">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="qName" class="form-label">Add Question</label>
+                    <input type="text" id="qName" name="q" class="form-control">
+                </div>
+                <div class="mb-3 form-group">
+                    <label for="Subject" class="form-label">Subject</label>
+                    <input type="text" class="form-control" id="Subject" name="Subject" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-2 form-group">
+                    <label for="classStream">Class Stream :</label>
+                    <select class="form-select" name="class_stream" id="classStream" aria-label="Default select example">
+                        <option value=""></option>
+                        <option value="MScCS">M.Sc.(CS)</option>
+                        <option value="MScCA">M.Sc.(CA)</option>
+                        <option value="MScCN">M.Sc.(CN)</option>
+                        <option value="MCA">MCA</option>
+                    </select>
+                </div>
+                <div class="mb-2 form-group">
+                    <label for="classYear">Class Year :</label>
+                    <select class="form-select" name="class_year" id="classYear">
+                        <option value=""></option>
+                        <option value="firstYear">First Year</option>
+                        <option value="secondYear">Second Year</option>
+                    </select>
+                </div>
+                
+                <input class="btn btn-primary w-50 d-flex justify-content-center align-items-center mt-3 mb-3" style="margin: 0px auto;" type="submit" value="Add" name="Add">
+            </form>
+        </div>
+    </div>
+
+{% endblock body %}
+

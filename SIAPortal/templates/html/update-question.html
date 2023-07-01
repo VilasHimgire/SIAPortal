@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Add Questions{% endblock title %}
+
+{% block body %}
+<div class="container-fluid ">
+    <h2 class="text-center mt-3">Update Questions and Options</h2>
+    <hr>
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="border border-1 border-dark m-3 w-50 p-2 bg-light">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="qName" class="form-label">Add Question</label>
+                    <input type="text" id="qName" name="q" class="form-control" value="{{question.q}}">
+                </div>
+                <div class="form-group">
+                    <label for="qName" class="form-label">Add Option 1</label>
+                    <input type="text" name="o1" class="form-control" id="option1" value="{{question.opt1}}">
+                </div>
+                <div class="form-group">
+                    <label for="qName" class="form-label">Add Option 2</label>
+                    <input type="text" name="o2" class="form-control" id="option2" value="{{question.opt2}}">
+                </div>
+                <div class="form-group">
+                    <label for="qName" class="form-label">Add Option 3</label>
+                    <input type="text" name="o3" class="form-control" id="option3" value="{{question.opt3}}">
+                </div>
+                <div class="form-group">
+                    <label for="qName" class="form-label">Add Option 4</label>
+                    <input type="text" name="o4" class="form-control" id="option4" value="{{question.opt4}}">
+                </div>
+                <div class="form-group">
+                    <label for="correctOption" class="form-label">Expected Option</label>
+                    <select name="ans" id="correctOption" class="form-select">
+                        <option value="">Choose correct option</option>
+                        <option value="o1" {% if question.ans == question.opt1 %} selected {% endif %}>option 1</option>
+                        <option value="o2" {% if question.ans == question.opt2 %} selected {% endif %}>option 2</option>
+                        <option value="o3" {% if question.ans == question.opt3 %} selected {% endif %}>option 3</option>
+                        <option value="o4" {% if question.ans == question.opt4 %} selected {% endif %}>option 4</option>
+                    </select>
+                </div>
+                <input class="btn btn-primary w-50 d-flex justify-content-center align-items-center mt-3 mb-3" style="margin: 0px auto;" type="submit" value="Update" name="Update">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock body %}

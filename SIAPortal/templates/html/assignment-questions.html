@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Assignment Questions List{% endblock title %}
+<!-- 
+<script type="text/javascript">
+    function btnClick() {
+        fetch("get_ass_questions").then(function (response){
+            return response.json();
+        }).then(function (ass_questions){
+            for (var Q of ass_questions) {
+                var q = document.createElement("li");
+
+                li.innerHTML = Q.question;
+                
+                document.getElementById("assQuestions").appendChild(li);
+            }
+        })
+    }
+
+</script> -->
+
+{% block body %}
+<div class="m-3">
+    {% if request.user.is_staff %}
+    <div class="d-flex justify-content-end">
+        <a href="/addassquestions" class="btn btn-primary w-25 mt-2 mb-2">Add Assignment</a>
+    </div>
+    {% endif %}
+    <table class="table table-success table-striped table-hover table-bordered border-dark">
+        <tr>
+            <th>Sr. No.</th>
+            <th>Question</th>
+            <th>Action</th>
+        </tr>
+        {% for a in questions %}
+            <tr>
+                <td> {{ forloop.counter }} </td>
+                <td> {{ a.q }} </td>
+                {% if request.user.is_superuser %}
+                <td class="d-flex justify-content-center">
+                    <a href="/deleteassignmentq/{{a.id}}" class="btn btn-danger ms-2"><span class="bi bi-trash-fill"></span></a>
+                    <!-- <button class="btn btn-danger"><span class="bi bi-trash-fill"></span></button> -->
+                    <a href="/assignmentresponse/{{a.id}}" class=" ms-2 btn btn-warning"><span class="bi bi-eye-fill"></span></a>
+                </td>
+                {% else %}
+                <td> 
+                    <a href="/addassignment/{{a.id}}">Submit Assignment</a> 
+                    <a href="/assignmentresponse/{{a.id}}">View Response</a>
+                </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+{% endblock body %}
+

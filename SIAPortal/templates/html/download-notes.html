@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Download Notes{% endblock title %}
+
+
+{% block body %}
+<div class="m-3">
+    <div class="d-flex justify-content-end">
+        <a href="/notes" class="btn btn-primary w-25 mt-2 mb-2">Upload Notes</a>
+    </div>
+    <table class="table table-success table-striped table-hover table-bordered border-dark">
+        <tr>
+            <th>Sr. No.</th>
+            <th>Title</th>
+            <th>Class Stream</th>
+            <th>Class Year</th>
+            <th>Download</th>
+            {% if request.user.is_superuser %}
+            <th>Delete Notes</th>
+            {% endif%}
+        </tr>
+        {% for n in notes %}
+            <tr>
+                <td> {{ forloop.counter }} </td>
+                <td> {{ n.title }} </td>
+                <td> {{ n.cstream }} </td>
+                <td> {{ n.cyear }} </td>
+                <td> <a href="{{ n.notes.url }}">{{n.title}}</a> </td>
+                {% if request.user.is_superuser %}
+                <td class="d-flex justify-content-center">
+                    <a href="/deletenotes/{{n.id}}" class="btn btn-danger"><span class="bi bi-trash-fill"></span></a>
+                </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock body %}
